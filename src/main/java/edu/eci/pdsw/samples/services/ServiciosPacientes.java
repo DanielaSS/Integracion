@@ -48,7 +48,7 @@ public abstract class ServiciosPacientes {
     
     
     /**
-     * Registra un nuevo PASIENTE en el sistema
+     * Registra un nuevo PACIENTE en el sistema
      * @param p El nuevo paciente
      * @throws Exception si se presenta algún error lógico
      * o de persistencia (por ejemplo, si el paciente ya existe).
