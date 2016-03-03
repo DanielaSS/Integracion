@@ -50,7 +50,7 @@ public abstract class ServiciosPacientes {
     /**
      * Registra un nuevo PACIENTE en el sistema
      * @param p El nuevo paciente
-     * @throws ExceptionServiciosPacientes, si se presenta persistencia (por ejemplo, si el paciente ya existe).
+     * @throws ExceptionServiciosPacientes, si se presenta persistencia (por ejemplo, si el paciente ya existe) o algún problema lógico.
      */
     public abstract void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes;
     
