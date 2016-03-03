@@ -16,27 +16,61 @@
  */
 package edu.eci.pdsw.samples.tests;
 
+import edu.eci.pdsw.samples.entities.Consulta;
+import edu.eci.pdsw.samples.entities.Paciente;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
+import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.sql.Date;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.Assert;
 
 /**
  *
  * @author hcadavid
  */
 public class ConsultasTest {
-    
-    public ConsultasTest() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
+    /*
+    Clases de equivalencia:
+    Se añade un paciente
+    Se crea una consulta del paciente
+    Se intenta consultar paciente inexistente
+    Se intenta añadir consulta a paciente inexistente
+    */
+    //Se añaden pacientes a los servicios
     @Test
-    public void registroPacienteTest(){
-        
-    }
-    
-    
+    public void deberiaAddPaciente(){
+        try {
+            Paciente p=new Paciente(0, "CC", "Daniela", Date.valueOf("1995-10-05"));
+            ServiciosPacientesStub stb=new ServiciosPacientesStub();
+            stb.registrarNuevoPaciente(p);
+        } catch (ExcepcionServiciosPacientes ex) {
+            Assert.fail("Lanzo excepcion");
+        }
+    }  
+    //Se añade consulta a un paciente
+    @Test
+    public void deberiaAddConsultaAlPaciente(){
+        try {
+            boolean correcto=false;
+            Paciente p=new Paciente(0, "CC", "Daniela", Date.valueOf("1995-10-05"));
+            ServiciosPacientesStub stb=new ServiciosPacientesStub();
+            Consulta c=new Consulta(Date.valueOf("2016-03-03"),"Daniela se pego en el meñique");
+            stb.registrarNuevoPaciente(p);
+            stb.agregarConsultaAPaciente(0, "CC", c);
+            Set<Consulta> consultasP=stb.consultarPaciente(0, "CC").getConsultas();
+            for(Consulta i: consultasP){
+                if(i.toString().equals(c.toString())){
+                    correcto=true;
+                }
+            }
+            Assert.assertTrue(correcto);
+        } catch (ExcepcionServiciosPacientes ex) {
+            Assert.fail("Lanzo excepcion");
+        }
+    }    
 }
