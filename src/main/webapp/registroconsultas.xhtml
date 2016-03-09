@@ -2,18 +2,17 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>Registro y consuta pacientes</h:head>
+    <h:head>REGISTRO Y CONSULTA PACIENTES </h:head>
     <h:body>
-        <h:form id=Paciente>
-            <p:outputLabel value="#{RegistroConsulta.paciente.nombre}"/>
-            <p:outputLabel value="#{RegistroConsulta.paciente.tipo_id}"/>
-            <p:outputLabel value="#{RegistroConsulta.paciente.id}"/>
-            <p:outputLabel value="#{RegistroConsulta.paciente.fechaNacimiento}"/>
-            <p:outputLabel value="_______________________________________________________"/>
+        <h:form id="pacienteConsultado">
+            <br></br><b><p:outputLabel value="Nombre: "/></b> <p:outputLabel value="#{RegistroConsulta.pacienteConsulta.nombre}"/>
+            <br></br><b><p:outputLabel value="Tipo id : "/></b><p:outputLabel value="#{RegistroConsulta.pacienteConsulta.tipo_id}"/>
+            <br></br><b><p:outputLabel value="Id : "/></b><p:outputLabel value="#{RegistroConsulta.pacienteConsulta.id}"/>
+            <br></br><b><p:outputLabel value="Fecha Naciemiento : "/></b><p:outputLabel value="#{RegistroConsulta.pacienteConsulta.fechaNacimiento}"/>
         </h:form>
-        <h:form id=pacienteConsultas>
-            <p:dataTable var="consultasPaciente" value="#{RegistroConsulta.pacienteConsulta}">
-                <p:column headerText=Id>
+        <h:form id="pacienteConsultas">
+            <p:dataTable var="consultasPaciente" value="#{RegistroConsulta.pacienteConsultas()}">
+                <p:column headerText="Id">
                     <h:outputText value="#{consultasPaciente.id}"/>
                 </p:column>
                 <p:column headerText="Fecha y hora">

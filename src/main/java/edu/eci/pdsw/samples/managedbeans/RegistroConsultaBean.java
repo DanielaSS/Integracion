@@ -43,8 +43,12 @@ public class RegistroConsultaBean implements Serializable{
     private Paciente pacienteConsulta; 
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
     
-    public Paciente getPaciente() {
+    public Paciente getPacienteConsulta() {
         return pacienteConsulta;
+    }
+
+    public void setPacienteConsulta(Paciente pacienteConsulta) {
+        this.pacienteConsulta = pacienteConsulta;
     }
 
     public List<Paciente> getPacientes(){
@@ -90,7 +94,7 @@ public class RegistroConsultaBean implements Serializable{
         }
     }   
         
-    public Set<Consulta> pacienteConsulta(){
+    public Set<Consulta> pacienteConsultas(){
         return pacienteConsulta.getConsultas();  
     } 
     public String moveToRegistrarPaciente(){

@@ -7,17 +7,17 @@
 
     <h:body>
         <h:form id="registrar">
-            <p:inputText value="#{RegistroConsulta.nombre}"/>
-            <p:inputText value="#{RegistroConsulta.id}"/>
-            <p:inputText value="#{RegistroConsulta.tipo_id}"/>
-            <p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
+            <br></br><b><p:outputLabel value="Nombre: "/></b><p:inputText value="#{RegistroConsulta.nombre}"/>
+            <br></br><b><p:outputLabel value="Id: "/></b><p:inputText value="#{RegistroConsulta.id}"/>
+            <br></br><b><p:outputLabel value="Tipo_id: "/></b><p:inputText value="#{RegistroConsulta.tipo_id}"/>
+            <br></br><b><p:outputLabel value="Fecha nacimiento: "/></b><p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
             <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}" update=":registrados"/>
         </h:form>
         <h:form id="registrados">
             <p:dataTable var="paciente" value="#{RegistroConsulta.pacientes}">
                 <p:column>
                     <p:commandButton value="Seleccionar">
-                        <f:setPropertyActionListener value="#{paciente}" target="#{RegistroConsulta.pacienteConsulta}">
+                        <f:setPropertyActionListener value="#{paciente}" target="#{RegistroConsulta.pacienteConsulta}"/>
                     </p:commandButton>
                 </p:column>
                 <p:column headerText="Id">
