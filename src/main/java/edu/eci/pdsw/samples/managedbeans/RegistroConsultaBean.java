@@ -25,7 +25,7 @@ import javax.enterprise.context.SessionScoped;
  *
  * @author hcadavid
  */
-@ManagedBean
+@ManagedBean()
 @SessionScoped
 public class RegistroConsultaBean implements Serializable{
     

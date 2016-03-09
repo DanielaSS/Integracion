@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -33,7 +34,9 @@ public class Paciente {
     Set<Consulta> consultas;
     
 
-    public Paciente(int id, String tipo_id, String nombre, Date fechaNacimiento) {
+    public Paciente(int id, String tipo_id, String nombre, Date fechaNacimiento) throws ExcepcionServiciosPacientes {
+        if(id<=0)throw new ExcepcionServiciosPacientes(ExcepcionServiciosPacientes.PACIENTE_IDINVALIDO);
+        /*if()throw new ExcepcionServiciosPacientes(Excepcio*/
         this.id = id;
         this.tipo_id = tipo_id;
         this.nombre = nombre;

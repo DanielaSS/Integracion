@@ -32,7 +32,7 @@ public class PacientesTest {
     /**
      * Clases de equivalenci:
      * 1) Se registra un paciente sin problemas 
-     * 2) Se registra varias veces el mismo paciente, es decir negativo
+     * 2) Se registra varias veces el mismo paciente, es decir repetido
      * 3) 
      * 4) 
      */
@@ -66,10 +66,21 @@ public class PacientesTest {
            servicios.registrarNuevoPaciente(Thomas);
            Assert.fail("No lanzo excepcion");
         }catch(ExcepcionServiciosPacientes e){
-            Assert.assertTrue("Lanzo Excepcion"+e.getMessage(), true);
+            Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_EXISTENTE, e.getMessage());
         }
     }
-    //Prueba 3, se 
-  
+    //Prueba 3, Se 
+    @Test
+    public void classEqDosRegistroPaciente(){
+        try{
+           Paciente Thomas= new Paciente(2,"CC","Thomas Caballero",java.sql.Date.valueOf("2010-10-07"));
+           ServiciosPacientesStub servicios= new ServiciosPacientesStub();
+           servicios.registrarNuevoPaciente(Thomas);
+           servicios.registrarNuevoPaciente(Thomas);
+           Assert.fail("No lanzo excepcion");
+        }catch(ExcepcionServiciosPacientes e){
+            Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_EXISTENTE, e.getMessage());
+        }
+    }
        
 }
