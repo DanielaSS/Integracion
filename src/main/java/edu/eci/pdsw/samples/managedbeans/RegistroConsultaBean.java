@@ -22,6 +22,7 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -40,9 +41,65 @@ public class RegistroConsultaBean implements Serializable{
     private String tipo_id;
     private String nombre;
     private String fechaNacimiento;
-    private Paciente pacienteConsulta; 
+    //Consulta
+    private String fechaConsulta;
+    private int hora;
+    private int minutos;
+    private String resumen;
+    ///
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
+    private Paciente pacienteConsulta; 
+    ////////////////////////////////////////////////////////
     
+    public void agregarConsulta(){
+        /*Date fechayHora =Date.valueOf(fechaConsulta);
+        fechayHora.setHours(hora);
+        fechayHora.setMinutes(minutos);*/
+        Consulta consultaPaciente = new Consulta(Date.valueOf(fechaConsulta),resumen);
+        try {
+            sp.agregarConsultaAPaciente(pacienteConsulta.getId(), pacienteConsulta.getTipo_id(), consultaPaciente);
+        } catch (ExcepcionServiciosPacientes ex) {
+            Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void registrar(){
+        try {
+            sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,Date.valueOf(fechaNacimiento)));
+        } catch (ExcepcionServiciosPacientes ex) {
+            Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+        
+    public List<Consulta> pacienteConsultas(){        
+         ArrayList<Consulta> ans=new ArrayList<Consulta>();
+        for(Consulta p: pacienteConsulta.getConsultas()){
+            ans.add(p);
+        }
+        return ans;
+    } 
+    public String moveToRegistrarPaciente(){
+        return "registropacientes";
+    }
+    public String moveToRegistrarConsulta(){
+        return "registroconsultas";
+    }
+    public String getFechaConsulta() {
+        return fechaConsulta;
+    }
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public void setFechaConsulta(String fechaConsulta) {
+        this.fechaConsulta = fechaConsulta;
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
+
     public Paciente getPacienteConsulta() {
         return pacienteConsulta;
     }
@@ -85,23 +142,19 @@ public class RegistroConsultaBean implements Serializable{
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-    public void registrar(){
-        try {
-            sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,Date.valueOf(fechaNacimiento)));
-        } catch (ExcepcionServiciosPacientes ex) {
-            
-        }
+        public int getHora() {
+        return hora;
+    }
+
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
     }   
-        
-    public Set<Consulta> pacienteConsultas(){
-        return pacienteConsulta.getConsultas();  
-    } 
-    public String moveToRegistrarPaciente(){
-        return "registropacientes";
-    }
-    public String moveToRegistrarConsulta(){
-        return "registroconsultas";
-    }
-        
 }

@@ -7,10 +7,14 @@
 
     <h:body>
         <h:form id="registrar">
-            <br></br><b><p:outputLabel value="Nombre: "/></b><p:inputText value="#{RegistroConsulta.nombre}"/>
-            <br></br><b><p:outputLabel value="Id: "/></b><p:inputText value="#{RegistroConsulta.id}"/>
-            <br></br><b><p:outputLabel value="Tipo_id: "/></b><p:inputText value="#{RegistroConsulta.tipo_id}"/>
-            <br></br><b><p:outputLabel value="Fecha nacimiento: "/></b><p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
+            <br></br><b><p:outputLabel value="Nombre: "/></b>
+            <br></br><p:inputText value="#{RegistroConsulta.nombre}"/>
+            <br></br><b><p:outputLabel value="Id: "/></b>
+            <br></br><p:inputText value="#{RegistroConsulta.id}"/>
+            <br></br><b><p:outputLabel value="Tipo_id: "/></b>
+            <br></br><p:inputText value="#{RegistroConsulta.tipo_id}"/>
+            <br></br><b><p:outputLabel value="Fecha nacimiento (yyyy-mm-dd): "/></b>
+            <br></br><p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
             <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}" update=":registrados"/>
         </h:form>
         <h:form id="registrados">

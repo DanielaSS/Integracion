@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>REGISTRO Y CONSULTA PACIENTES </h:head>
+    <h:head><b>REGISTRO DE CONSULTAS Y CONSULTAS PACIENTE</b></h:head>
     <h:body>
         <h:form id="pacienteConsultado">
             <br></br><b><p:outputLabel value="Nombre: "/></b> <p:outputLabel value="#{RegistroConsulta.pacienteConsulta.nombre}"/>
@@ -10,19 +10,28 @@
             <br></br><b><p:outputLabel value="Id : "/></b><p:outputLabel value="#{RegistroConsulta.pacienteConsulta.id}"/>
             <br></br><b><p:outputLabel value="Fecha Naciemiento : "/></b><p:outputLabel value="#{RegistroConsulta.pacienteConsulta.fechaNacimiento}"/>
         </h:form>
-        <h:form id="pacienteConsultas">
-            <p:dataTable var="consultasPaciente" value="#{RegistroConsulta.pacienteConsultas()}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{consultasPaciente.id}"/>
-                </p:column>
-                <p:column headerText="Fecha y hora">
-                    <h:outputText value="#{consultasPaciente.fechayHora.toString}"/>
-                </p:column>
-                <p:column headerText="Resumen">
-                    <h:outputText value="#{consultasPaciente.resumen}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
-    </h:body>
-
+    <h:form id="agregarConsulta">
+        <br></br><p:outputLabel value="_______________________________________________________________________________________"/>
+        <br></br><b><p:outputLabel value="Fecha: (yyyy-mm-dd) "/></b>
+        <br></br><p:inputText value="#{RegistroConsulta.fechaConsulta}"/>
+        <!--<br></br><b><p:outputLabel value="Hora: "/></b><p:inputText value="#{RegistroConsulta.hora}"/>
+        <br></br><b><p:outputLabel value="Minutos: "/></b><p:inputText value="#{RegistroConsulta.minutos}"/>-->
+        <br></br><b><p:outputLabel value="Resumen: "/></b>
+        <br></br><p:inputText value="#{RegistroConsulta.resumen}"/>
+        <br></br><p:commandButton value="Agregar consulta" actionListener="#{RegistroConsulta.agregarConsulta()}" update=":pacienteConsultas"/>
+    </h:form>
+    <h:form id="pacienteConsultas">
+        <p:dataTable var="consultasPaciente" value="#{RegistroConsulta.pacienteConsultas()}">
+            <p:column headerText="Id">
+                <h:outputText value="#{consultasPaciente.id}"/>
+            </p:column>
+            <p:column headerText="Fecha y hora">
+                <h:outputText value="#{consultasPaciente.fechayHora}"/>
+            </p:column>
+            <p:column headerText="Resumen">
+                <h:outputText value="#{consultasPaciente.resumen}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
 </html>
