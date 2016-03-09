@@ -45,7 +45,7 @@ public class ConsultasTest {
     @Test
     public void deberiaAddPaciente(){
         try {
-            Paciente p=new Paciente(0, "CC", "Daniela", Date.valueOf("1995-10-05"));
+            Paciente p=new Paciente(5, "CC", "Daniela", Date.valueOf("1995-10-05"));
             ServiciosPacientesStub stb=new ServiciosPacientesStub();
             stb.registrarNuevoPaciente(p);
         } catch (ExcepcionServiciosPacientes ex) {
@@ -57,12 +57,12 @@ public class ConsultasTest {
     public void deberiaAddConsultaAlPaciente(){
         try {
             boolean correcto=false;
-            Paciente p=new Paciente(0, "CC", "Daniela", Date.valueOf("1995-10-05"));
+            Paciente p=new Paciente(1, "CC", "Daniela", Date.valueOf("1995-10-05"));
             ServiciosPacientesStub stb=new ServiciosPacientesStub();
             Consulta c=new Consulta(Date.valueOf("2016-03-03"),"Daniela se pego en el meñique");
             stb.registrarNuevoPaciente(p);
-            stb.agregarConsultaAPaciente(0, "CC", c);
-            Set<Consulta> consultasP=stb.consultarPaciente(0, "CC").getConsultas();
+            stb.agregarConsultaAPaciente(1, "CC", c);
+            Set<Consulta> consultasP=stb.consultarPaciente(1, "CC").getConsultas();
             for(Consulta i: consultasP){
                 if(i.toString().equals(c.toString())){
                     correcto=true;
