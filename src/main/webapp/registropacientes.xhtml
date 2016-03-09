@@ -5,7 +5,16 @@
     <h:head></h:head>
 
     <h:body>
-        
+        <h:form id="registrar">
+            <p:inputText value="#{RegistroConsulta.nombre}"/>
+            <p:inputText value="#{RegistroConsulta.id}"/>
+            <p:inputText value="#{RegistroConsulta.tipo_id}"/>
+            <p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
+            <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}"/>
+        </h:form>
+        <h:form id="registrados">
+            
+        </h:form>
     </h:body>
 
 </html>

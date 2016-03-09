@@ -16,20 +16,74 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import edu.eci.pdsw.samples.entities.Paciente;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author hcadavid
  */
-@ManagedBean()
+@ManagedBean(name="RegistroConsulta",eager=true)
 @SessionScoped
 public class RegistroConsultaBean implements Serializable{
-    
+
+    private int id;
+    private String tipo_id;
+    private String nombre;
+    private String fechaNacimiento;
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
     
-    
+    public void registrar(){
+        try {
+            sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,Date.valueOf(fechaNacimiento)));
+        } catch (ExcepcionServiciosPacientes ex) {
+            
+        }
+    }    
+    public String moveToRegistrarPaciente(){
+        return "registropacientes";
+    }
+    public String moveToRegistrarConsulta(){
+        return "registroconsultas";
+    }
+        
 }
