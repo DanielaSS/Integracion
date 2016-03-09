@@ -24,7 +24,7 @@ public class ExcepcionServiciosPacientes extends Exception {
     
     public static final String PACIENTE_EXISTENTE="El paciente ya se encuentra registrado";
     public static final String PACIENTE_IDINVALIDO="El numero de documento no es valido para el paciente";
-    public static final String PACIENTE_FECHA_NACIMIENTO="La fecha de nacimiento no es valido para el paciente"; 
+    
 
     public ExcepcionServiciosPacientes() {
     }

@@ -73,13 +73,12 @@ public class PacientesTest {
     @Test
     public void classEqDosRegistroPaciente(){
         try{
-           Paciente Thomas= new Paciente(2,"CC","Thomas Caballero",java.sql.Date.valueOf("2010-10-07"));
+           Paciente Thomas= new Paciente(-3,"CC","Thomas Caballero",java.sql.Date.valueOf("2010-10-07"));
            ServiciosPacientesStub servicios= new ServiciosPacientesStub();
-           servicios.registrarNuevoPaciente(Thomas);
            servicios.registrarNuevoPaciente(Thomas);
            Assert.fail("No lanzo excepcion");
         }catch(ExcepcionServiciosPacientes e){
-            Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_EXISTENTE, e.getMessage());
+            Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_IDINVALIDO, e.getMessage());
         }
     }
        
