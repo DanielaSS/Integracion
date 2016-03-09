@@ -21,6 +21,7 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -33,13 +34,15 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="RegistroConsulta",eager=true)
 @SessionScoped
 public class RegistroConsultaBean implements Serializable{
-
     private int id;
     private String tipo_id;
     private String nombre;
     private String fechaNacimiento;
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
 
+    public List<Paciente> getPacientes(){
+        return sp.getPacientes();
+    }
     public int getId() {
         return id;
     }

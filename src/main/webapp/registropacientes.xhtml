@@ -10,10 +10,20 @@
             <p:inputText value="#{RegistroConsulta.id}"/>
             <p:inputText value="#{RegistroConsulta.tipo_id}"/>
             <p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
-            <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}"/>
+            <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}" update=":registrados"/>
         </h:form>
         <h:form id="registrados">
-            
+            <p:dataTable var="paciente" value="#{RegistroConsulta.pacientes}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{paciente.id}"/>
+                </p:column>
+                <p:column headerText="Tipo Id">
+                    <h:outputText value="#{paciente.tipo_id}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{paciente.nombre}"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </h:body>
 

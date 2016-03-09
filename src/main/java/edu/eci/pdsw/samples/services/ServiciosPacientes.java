@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.util.List;
 
 /**
  *
@@ -32,7 +33,7 @@ public abstract class ServiciosPacientes {
     protected ServiciosPacientes(){        
 
     }
-    
+    public abstract List<Paciente> getPacientes();
     public static ServiciosPacientes getInstance() throws RuntimeException{        
         return instance;
     }
