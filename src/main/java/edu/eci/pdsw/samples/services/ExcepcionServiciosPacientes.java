@@ -21,6 +21,8 @@ package edu.eci.pdsw.samples.services;
  * @author hcadavid
  */
 public class ExcepcionServiciosPacientes extends Exception {
+    
+    public static final String PACIENTE_EXISTENTE="El paciente ya se encuentra registrado";
 
     public ExcepcionServiciosPacientes() {
     }

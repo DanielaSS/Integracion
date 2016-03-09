@@ -32,8 +32,8 @@ public class PacientesTest {
     /**
      * Clases de equivalenci:
      * 1) Se registra un paciente sin problemas 
-     * 2) Se registra varias veces el mismo paciente
-     * 3) Se registra enviando null, al paciente
+     * 2) Se registra varias veces el mismo paciente, es decir negativo
+     * 3) 
      * 4) 
      */
     
@@ -58,7 +58,7 @@ public class PacientesTest {
     }
     //Prueba 2, Se registra el mismo paciente dos veces, deberia presentar excepcion
     @Test
-    public void classEqDosRegistroPacienteDocumentoIdNegativo(){
+    public void classEqDosRegistroPacienteRepetido(){
         try{
            Paciente Thomas= new Paciente(2,"CC","Thomas Caballero",java.sql.Date.valueOf("2010-10-07"));
            ServiciosPacientesStub servicios= new ServiciosPacientesStub();
@@ -69,6 +69,7 @@ public class PacientesTest {
             Assert.assertTrue("Lanzo Excepcion"+e.getMessage(), true);
         }
     }
+    //Prueba 3, se 
   
        
 }
