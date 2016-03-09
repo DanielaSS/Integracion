@@ -72,5 +72,28 @@ public class ConsultasTest {
         } catch (ExcepcionServiciosPacientes ex) {
             Assert.fail("Lanzo excepcion");
         }
-    }    
+    }   
+    //Se intenta consultar un paciente inexistente
+    @Test
+    public void noDeberiaConsultarPacienteInexistente(){
+        try{
+            ServiciosPacientesStub stb=new ServiciosPacientesStub();
+            stb.consultarPaciente(23, "CC");
+            Assert.fail("No se lanzo excepcion");
+        } catch(ExcepcionServiciosPacientes ex){
+            Assert.assertEquals(ex.getMessage(),"Paciente "+23+" no esta registrado");
+        }
+    }
+    //Se intenta añadir una consulta a paciente inexistente
+    @Test
+    public void noDeberiaAddConsultaPacienteInexistente(){
+        try{
+            Consulta c=new Consulta();
+            ServiciosPacientesStub stb=new ServiciosPacientesStub();
+            stb.agregarConsultaAPaciente(23, "CC", c);
+            Assert.fail("No se lanzo excepcion");
+        } catch(ExcepcionServiciosPacientes ex){
+            Assert.assertEquals(ex.getMessage(),"Paciente "+23+" no esta registrado");
+        }  
+    }
 }
