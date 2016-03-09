@@ -16,12 +16,14 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -38,7 +40,12 @@ public class RegistroConsultaBean implements Serializable{
     private String tipo_id;
     private String nombre;
     private String fechaNacimiento;
+    private Paciente pacienteConsulta; 
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
+    
+    public Paciente getPaciente() {
+        return pacienteConsulta;
+    }
 
     public List<Paciente> getPacientes(){
         return sp.getPacientes();
@@ -81,7 +88,11 @@ public class RegistroConsultaBean implements Serializable{
         } catch (ExcepcionServiciosPacientes ex) {
             
         }
-    }    
+    }   
+        
+    public Set<Consulta> pacienteConsulta(){
+        return pacienteConsulta.getConsultas();  
+    } 
     public String moveToRegistrarPaciente(){
         return "registropacientes";
     }
