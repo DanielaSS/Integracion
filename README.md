@@ -3,4 +3,4 @@ En este repositorio tenemos el desarrollo de la práctica de laboratorio N°6. D
 El Autor 1: David Useche
 El Autor 2: Daniela Sepúlveda
 
-Terminamos en el punto 11. 
+Terminamos!
