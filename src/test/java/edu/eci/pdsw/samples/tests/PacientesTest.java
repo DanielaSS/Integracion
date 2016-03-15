@@ -70,7 +70,7 @@ public class PacientesTest {
         }
     }
     //Prueba 3, Se 
-    @Test
+/*    @Test
     public void classEqDosRegistroPaciente(){
         try{
            Paciente Thomas= new Paciente(-3,"CC","Thomas Caballero",java.sql.Date.valueOf("2010-10-07"));
@@ -81,5 +81,5 @@ public class PacientesTest {
             Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_IDINVALIDO, e.getMessage());
         }
     }
-       
+*/       
 }
