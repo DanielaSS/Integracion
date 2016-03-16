@@ -10,6 +10,7 @@ import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.DaoPaciente;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -28,13 +29,20 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
     
     public ServiciosPacientesPersistencia(){
         InputStream input = null;
-        input = ClassLoader.getSystemResourceAsStream("applicationconfig.properties");
+        
+        
+        try {
+            input = ServiciosPacientesPersistencia.class.getClassLoader().getResource("applicationconfig.properties").openStream();
+        } catch (IOException ex) {
+            Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         Properties properties=new Properties();
         try {
             properties.load(input);
         } catch (IOException ex) {
-            //Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.INFO, null, ex);
         }
         
         dao=DaoFactory.getInstance(properties);

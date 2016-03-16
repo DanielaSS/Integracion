@@ -4,7 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <br>REGISTRO PACIENTES</br>     
+        <br><center>REGISTRO PACIENTES</center></br>     
     </h:head>
 
     <h:body>
@@ -18,6 +18,7 @@
             <br></br><b><p:outputLabel value="Fecha nacimiento (yyyy-mm-dd): "/></b>
             <br></br><p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
             <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}" update=":registrados"/>
+            
         </h:form>
         <p:separator />
         <h:form id="registrados">
