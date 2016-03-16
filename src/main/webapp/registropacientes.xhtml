@@ -17,6 +17,7 @@
             <br></br><p:inputText value="#{RegistroConsulta.fechaNacimiento}"/>
             <p:commandButton value="Registrar" actionListener="#{RegistroConsulta.registrar()}" update=":registrados"/>
         </h:form>
+        <p:separator />
         <h:form id="registrados">
             <p:dataTable var="paciente" value="#{RegistroConsulta.pacientes}">
                 <p:column>

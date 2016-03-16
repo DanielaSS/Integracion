@@ -15,7 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package edu.eci.pdsw.samples.managedbeans;
-
+ 
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
@@ -59,7 +62,8 @@ public class RegistroConsultaBean implements Serializable{
         try {
             sp.agregarConsultaAPaciente(pacienteConsulta.getId(), pacienteConsulta.getTipo_id(), consultaPaciente);
         } catch (ExcepcionServiciosPacientes ex) {
-            Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
+             error(ex.getMessage());
+            //Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
             
         }
     }
@@ -68,7 +72,8 @@ public class RegistroConsultaBean implements Serializable{
         try {
             sp.registrarNuevoPaciente(new Paciente(id,tipo_id,nombre,Date.valueOf(fechaNacimiento)));
         } catch (ExcepcionServiciosPacientes ex) {
-            Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
+            error(ex.getMessage());
+            //Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
         
@@ -157,5 +162,8 @@ public class RegistroConsultaBean implements Serializable{
 
     public void setMinutos(int minutos) {
         this.minutos = minutos;
-    }   
+    }  
+    public void error(String e) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", e+"."));
+    }
 }
