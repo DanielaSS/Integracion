@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2015 hcadavid
  *
@@ -16,7 +17,6 @@
  */
 package edu.eci.pdsw.samples.entities;
 
-import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -113,5 +113,10 @@ public class JDBCDaoPaciente implements DaoPaciente {
         } */
         throw new RuntimeException("No se ha implementado el metodo 'Update' del DAOPAcienteJDBC");
     }
+
+    @Override
+    public List<Paciente> load() throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
