@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.tests;
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
+import edu.eci.pdsw.samples.services.ServiciosPacientesPersistencia;
 import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
 import org.junit.Before;
 import org.junit.Test;
@@ -96,4 +97,5 @@ public class ConsultasTest {
             Assert.assertEquals(ex.getMessage(),"Paciente "+23+" no esta registrado");
         }  
     }
+    
 }

@@ -82,7 +82,8 @@ public class PacientePersistenceTest {
             ps.setString(2, "CC");
             ResultSet rs=ps.executeQuery();
             boolean bandera=rs.next();
-            daof.endSession();
+            
+            
             if(!bandera){
                 fail(PersistenceException.PACIENTE_NO_EXISTENTE);
             }
@@ -90,7 +91,7 @@ public class PacientePersistenceTest {
                 assertTrue(paciente.getNombre().equals(rs.getString(1)) && paciente.getFechaNacimiento().equals(rs.getDate(2))&& (rs.getString(5).equals("Martin lo subio")||rs.getString(5).equals("Ahora carlos lo subio")));
                 bandera=rs.next();
             }
-            
+            daof.endSession();
         } catch (PersistenceException | SQLException ex) {
            /* try {
                 daof.endSession();
@@ -98,6 +99,7 @@ public class PacientePersistenceTest {
             } catch (PersistenceException ex1) {
                 fail("Error al cerrar"+ex1.getMessage());
             }*/
+            fail("Lanzo excepcion "+ ex.getMessage());
         }         
     }
     //2         DAOPaciente.save()      Paciente nuevo que se registra sin consultas

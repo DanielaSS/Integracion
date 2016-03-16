@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.tests;
 
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
+import edu.eci.pdsw.samples.services.ServiciosPacientesPersistencia;
 import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
  */
 public class PacientesTest {
     /**
-     * Clases de equivalenci:
+     * Clases de equivalencia:
      * 1) Se registra un paciente sin problemas 
      * 2) Se registra varias veces el mismo paciente, es decir repetido
      * 3) 
@@ -69,17 +70,5 @@ public class PacientesTest {
             Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_EXISTENTE, e.getMessage());
         }
     }
-    //Prueba 3, Se 
-/*    @Test
-    public void classEqDosRegistroPaciente(){
-        try{
-           Paciente Thomas= new Paciente(-3,"CC","Thomas Caballero",java.sql.Date.valueOf("2010-10-07"));
-           ServiciosPacientesStub servicios= new ServiciosPacientesStub();
-           servicios.registrarNuevoPaciente(Thomas);
-           Assert.fail("No lanzo excepcion");
-        }catch(ExcepcionServiciosPacientes e){
-            Assert.assertEquals(ExcepcionServiciosPacientes.PACIENTE_IDINVALIDO, e.getMessage());
-        }
-    }
-*/       
+    
 }

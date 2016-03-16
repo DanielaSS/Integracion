@@ -49,7 +49,7 @@ public class RegistroConsultaBean implements Serializable{
     ///
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
     private Paciente pacienteConsulta; 
-    ////////////////////////////////////////////////////////
+    ///
     
     public void agregarConsulta(){
         /*Date fechayHora =Date.valueOf(fechaConsulta);
@@ -60,6 +60,7 @@ public class RegistroConsultaBean implements Serializable{
             sp.agregarConsultaAPaciente(pacienteConsulta.getId(), pacienteConsulta.getTipo_id(), consultaPaciente);
         } catch (ExcepcionServiciosPacientes ex) {
             Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
     
@@ -108,7 +109,7 @@ public class RegistroConsultaBean implements Serializable{
         this.pacienteConsulta = pacienteConsulta;
     }
 
-    public List<Paciente> getPacientes(){
+    public List<Paciente> getPacientes() throws ExcepcionServiciosPacientes{
         return sp.getPacientes();
     }
     public int getId() {

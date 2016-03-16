@@ -27,6 +27,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,6 +59,18 @@ public class JDBCDaoPaciente implements DaoPaciente {
             ResultSet rs=ps.executeQuery();
             if(!rs.next())throw new PersistenceException(PersistenceException.PACIENTE_NO_EXISTENTE);
             Paciente ans=new Paciente(idpaciente, tipoid, rs.getString(3), rs.getDate(4));
+            String queryConsultas="SELECT idCONSULTAS, fecha_y_hora, resumen FROM CONSULTAS WHERE PACIENTES_id=? AND PACIENTES_tipo_id=?";
+            ps=con.prepareStatement(queryConsultas);
+            ps.setInt(1,idpaciente);
+            ps.setString(2, tipoid);
+            rs=ps.executeQuery();
+            Set<Consulta> consultas=new HashSet<>();
+            while(rs.next()){
+                Consulta tmp=new Consulta(rs.getDate(2),rs.getString(3));
+                tmp.setId(rs.getInt(1));
+                consultas.add(tmp);  
+            }
+            ans.setConsultas(consultas);
             return ans;
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading "+idpaciente,ex);
@@ -107,7 +121,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
     public void update(Paciente p) throws PersistenceException {
         PreparedStatement ps;
         /*try {
-            
+            //David implemente update para Añadir consulta a paciente
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading a product.",ex);
         } */
@@ -116,7 +130,21 @@ public class JDBCDaoPaciente implements DaoPaciente {
 
     @Override
     public List<Paciente> load() throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps;
+        ArrayList<Paciente> pacientes=new ArrayList<Paciente>();
+        String query="SELECT id, tipo_id FROM PACIENTES";
+        try {
+            ps=con.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                pacientes.add(load(rs.getInt(1),rs.getString(2)));
+            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(JDBCDaoPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("An error ocurred while list all.",ex);  
+        }
+        return pacientes;
     }
     
 }

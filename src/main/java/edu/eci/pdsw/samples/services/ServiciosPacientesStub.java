@@ -18,9 +18,7 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +86,7 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
     @Override
     public List<Paciente> getPacientes() {
-        ArrayList<Paciente> ans=new ArrayList<Paciente>();
+        ArrayList<Paciente> ans=new ArrayList<>();
         for(Paciente p:pacientes.values()){
             ans.add(p);
         }

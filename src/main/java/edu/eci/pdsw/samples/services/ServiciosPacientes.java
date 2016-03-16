@@ -26,14 +26,14 @@ import java.util.List;
  */
 public abstract class ServiciosPacientes {
     
-    
-    private static ServiciosPacientes instance=new ServiciosPacientesStub();
+    //David qal terminar implementacion cambiar por DAO
+    private static ServiciosPacientes instance=new ServiciosPacientesPersistencia();
     
     
     protected ServiciosPacientes(){        
 
     }
-    public abstract List<Paciente> getPacientes();
+    public abstract List<Paciente> getPacientes() throws ExcepcionServiciosPacientes;
     public static ServiciosPacientes getInstance() throws RuntimeException{        
         return instance;
     }
