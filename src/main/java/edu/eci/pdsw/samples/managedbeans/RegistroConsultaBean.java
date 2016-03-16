@@ -63,6 +63,7 @@ public class RegistroConsultaBean implements Serializable{
             sp.agregarConsultaAPaciente(pacienteConsulta.getId(), pacienteConsulta.getTipo_id(), consultaPaciente);
         } catch (ExcepcionServiciosPacientes ex) {
              error(ex.getMessage());
+             
             //Logger.getLogger(RegistroConsultaBean.class.getName()).log(Level.SEVERE, null, ex);
             
         }

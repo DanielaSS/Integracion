@@ -29,6 +29,7 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
     public ServiciosPacientesPersistencia(){
         InputStream input = null;
         input = ClassLoader.getSystemResourceAsStream("applicationconfig.properties");
+        
         Properties properties=new Properties();
         try {
             properties.load(input);
