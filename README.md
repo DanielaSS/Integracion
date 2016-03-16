@@ -14,11 +14,11 @@ Parte I:
 3.
 Parte II:
 
-1.
+1. Ya la creee
 
-2.
+2. ya
 
-3.
+3. Ya
 
 4.
 
