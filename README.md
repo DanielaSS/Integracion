@@ -6,12 +6,14 @@ El Autor 2: Daniela Sepúlveda
 Terminamos!
 Puntos: 
 Parte I:
+
 1. Ya!
 
 2. 
 
 3.
 Parte II:
+
 1.
 
 2.
