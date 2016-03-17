@@ -42,7 +42,7 @@ import static org.junit.Assert.*;
  */
 public class PacientePersistenceTest {
     //1         DAOPaciente.save()      Paciente nuevo que se registra con mas de una consulta
-    @Test
+/*    @Test
     public void classEquivRegistroPacienteMasDeUnaConsulta(){
         System.out.println("Prueba 1 Paciente mas de una consulta");
         InputStream input = null;
@@ -93,12 +93,12 @@ public class PacientePersistenceTest {
             }
             daof.endSession();
         } catch (PersistenceException | SQLException ex) {
-           /* try {
+            try {
                 daof.endSession();
                 fail("Lanzo excepcion: "+ex.getMessage());
             } catch (PersistenceException ex1) {
                 fail("Error al cerrar"+ex1.getMessage());
-            }*/
+            }
             fail("Lanzo excepcion "+ ex.getMessage());
         }         
     }
@@ -243,5 +243,5 @@ public class PacientePersistenceTest {
             assertEquals(ex.getMessage(), PersistenceException.PACIENTE_EXISTENTE);
         } 
     }
-
+*/
 }
