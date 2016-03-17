@@ -21,6 +21,7 @@
             
         </h:form>
         <p:separator />
+        <p:commandButton action="registroconsultas" value="Registrar consulta"/>
         <h:form id="registrados">
             <p:dataTable var="paciente" value="#{RegistroConsulta.pacientes}">
                 <p:column>
@@ -38,7 +39,6 @@
                     <h:outputText value="#{paciente.nombre}"/>
                 </p:column>
             </p:dataTable>
-            <h:commandButton action="registroconsultas" value="Registrar consulta"/>
         </h:form>
         <p:separator />
     </h:body>
