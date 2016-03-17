@@ -120,12 +120,19 @@ public class JDBCDaoPaciente implements DaoPaciente {
     @Override
     public void update(Paciente p) throws PersistenceException {
         PreparedStatement ps;
-        /*try {
+        boolean addConsulta;
+        try {
+            Set<Consulta> consultasPacienteUno=p.getConsultas();           
+            String updated="";
+            ps=con.prepareStatement(updated);
+            Paciente tmp=load(p.getId(),p.getTipo_id());
+            Set<Consulta> consultasTmp=tmp.getConsultas();
+            addConsulta=consultasTmp.size()<consultasPacienteUno.size();
             //David implemente update para Añadir consulta a paciente
         } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while loading a product.",ex);
-        } */
-        throw new RuntimeException("No se ha implementado el metodo 'Update' del DAOPAcienteJDBC");
+            throw new PersistenceException("An error ocurred while updating a product.",ex);
+        }
+        //throw new RuntimeException("No se ha implementado el metodo 'Update' del DAOPAcienteJDBC");
     }
 
     @Override

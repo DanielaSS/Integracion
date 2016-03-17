@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,7 +101,21 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
     //David implementar usando el update del DAO
     @Override
     public void agregarConsultaAPaciente(int idPaciente, String tipoid, Consulta c) throws ExcepcionServiciosPacientes {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            dao.beginSession(); 
+            persistencia=dao.getDaoPaciente();
+            Paciente paciente=persistencia.load(idPaciente, tipoid);
+            Set<Consulta> consultasP=paciente.getConsultas();
+            consultasP.add(c);
+            paciente.setConsultas(consultasP);
+            persistencia.update(paciente);
+            dao.commitTransaction();
+            dao.endSession();
+        } catch (PersistenceException ex) {
+            //Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosPacientes(ExcepcionServiciosPacientes.PACIENTE_EXISTENTE);
+        }        
+    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     
     }
     

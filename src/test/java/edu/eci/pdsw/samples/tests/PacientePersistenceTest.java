@@ -65,7 +65,7 @@ public class PacientePersistenceTest {
                     + "and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=? and pac.tipo_id=?";
             //IMPLEMENTACION DE LAS PRUEBAS
             DaoPaciente a=daof.getDaoPaciente();
-            Paciente paciente=new Paciente(2,"CC","Martin no subir",Date.valueOf("2005-08-15"));
+            Paciente paciente=new Paciente(500,"CC","Martin no subir",Date.valueOf("2005-08-15"));
             Consulta unaConsulta=new Consulta(Date.valueOf("2016-03-03"),"Martin lo subio");
             Consulta otraConsulta=new Consulta(Date.valueOf("2015-10-10"),"Ahora carlos lo subio");
             Set<Consulta> setConsultas=new HashSet<Consulta>();
@@ -78,7 +78,7 @@ public class PacientePersistenceTest {
             daof.commitTransaction();
             Connection cone=a.getCon();
             PreparedStatement ps=cone.prepareStatement(query);
-            ps.setInt(1, 2);
+            ps.setInt(1, 500);
             ps.setString(2, "CC");
             ResultSet rs=ps.executeQuery();
             boolean bandera=rs.next();
@@ -125,14 +125,14 @@ public class PacientePersistenceTest {
             
             //IMPLEMENTACION DE LAS PRUEBAS
             DaoPaciente a=daof.getDaoPaciente();
-            Paciente paciente=new Paciente(4,"CE","Casvad",Date.valueOf("2000-08-15"));
+            Paciente paciente=new Paciente(100,"CE","Casvad",Date.valueOf("2000-08-15"));
 
             a.save(paciente);
             
             daof.commitTransaction(); 
             Connection cone=a.getCon();
             PreparedStatement ps=cone.prepareStatement(query);
-            ps.setInt(1, 4);
+            ps.setInt(1, 100);
             ps.setString(2, "CE");
             ResultSet rs=ps.executeQuery();
             boolean bandera=rs.next();
@@ -167,7 +167,7 @@ public class PacientePersistenceTest {
         try{
             daof.beginSession();
             DaoPaciente persistenciaPaciente=daof.getDaoPaciente();
-            Paciente unPaciente=new Paciente(12,"CC","Isabel Marin",Date.valueOf("1990-08-15"));
+            Paciente unPaciente=new Paciente(300,"CC","Isabel Marin",Date.valueOf("1990-08-15"));
             Consulta unaConsulta=new Consulta(Date.valueOf("2016-03-03"),"Golpe en la cabeza por desmayo");
             Set<Consulta> setConsultas=new HashSet<Consulta>();
             setConsultas.add(unaConsulta);
@@ -183,7 +183,7 @@ public class PacientePersistenceTest {
             PreparedStatement ps=cone.prepareStatement(query);
        
             //Enviamos datos a la consulta
-            ps.setInt(1, 12);
+            ps.setInt(1, 300);
             ps.setString(2, "CC");
             ResultSet rs=ps.executeQuery();
             
@@ -218,7 +218,7 @@ public class PacientePersistenceTest {
         try{
             daof.beginSession();
             DaoPaciente persistenciaPaciente=daof.getDaoPaciente();
-            Paciente unPaciente=new Paciente(5,"CC","Maria alejandra Gallego",Date.valueOf("1999-01-30"));
+            Paciente unPaciente=new Paciente(400,"CC","Maria alejandra Gallego",Date.valueOf("1999-01-30"));
             //System.out.println("Paso");
             persistenciaPaciente.save(unPaciente);
             //System.out.println("Paso");
