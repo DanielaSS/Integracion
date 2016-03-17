@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.entities;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -68,6 +69,30 @@ public class Consulta {
     @Override
     public String toString() {
         return "("+id+","+fechayHora+","+resumen+")"; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Consulta other = (Consulta) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.resumen, other.resumen)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechayHora, other.fechayHora)) {
+            return false;
+        }
+        return true;
     }
     
     

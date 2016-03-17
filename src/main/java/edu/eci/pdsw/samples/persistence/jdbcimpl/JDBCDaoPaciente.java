@@ -97,7 +97,8 @@ public class JDBCDaoPaciente implements DaoPaciente {
                 ps.execute();
             }else throw new PersistenceException(PersistenceException.PACIENTE_EXISTENTE); 
             //Set<Consulta> setConsultas=p.getConsultas();
-            String insertConsultas="INSERT INTO CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) VALUES (?,?,?,?)";
+            String insertConsultas="INSERT INTO CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) "
+                    + "VALUES (?,?,?,?)";
             ps=con.prepareStatement(insertConsultas);
             int n=1;
             for(Consulta c :  p.getConsultas()){
@@ -120,14 +121,34 @@ public class JDBCDaoPaciente implements DaoPaciente {
     @Override
     public void update(Paciente p) throws PersistenceException {
         PreparedStatement ps;
-        boolean addConsulta;
+        //boolean addConsulta;
         try {
             Set<Consulta> consultasPacienteUno=p.getConsultas();           
-            String updated="";
+            String updated="UPDATE PACIENTES SET nombre=?,fecha_nacimiento=? WHERE id=? AND tipo_id=?";
             ps=con.prepareStatement(updated);
-            Paciente tmp=load(p.getId(),p.getTipo_id());
-            Set<Consulta> consultasTmp=tmp.getConsultas();
-            addConsulta=consultasTmp.size()<consultasPacienteUno.size();
+            ps.setString(1, p.getNombre());
+            ps.setDate(2, p.getFechaNacimiento());
+            ps.setInt(3, p.getId());
+            ps.setString(4, p.getTipo_id());
+            ps.execute();
+            String delete="DELETE FROM CONSULTAS WHERE PACIENTES_id=? AND PACIENTES_tipo_id=?";
+            ps=con.prepareStatement(delete);
+            ps.setInt(1, p.getId());
+            ps.setString(2, p.getTipo_id());
+            ps.execute();
+            String insert="INSERT INTO CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) "
+                    + "VALUES (?,?,?,?)";
+            ps=con.prepareStatement(insert);
+            ps.setInt(3, p.getId());
+            ps.setString(4, p.getTipo_id());
+            //Paciente tmp=load(p.getId(),p.getTipo_id());
+            //Set<Consulta> consultasTmp=tmp.getConsultas();
+            //addConsulta=consultasTmp.size()<consultasPacienteUno.size();
+            for(Consulta c:consultasPacienteUno){
+                ps.setDate(1, c.getFechayHora());
+                ps.setString(2, c.getResumen());
+                ps.execute();
+            }
             //David implemente update para Añadir consulta a paciente
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while updating a product.",ex);
