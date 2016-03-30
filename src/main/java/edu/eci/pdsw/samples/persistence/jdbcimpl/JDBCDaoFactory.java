@@ -72,10 +72,7 @@ public class JDBCDaoFactory extends DaoFactory {
         }
         
     }
-
-
-    
-    
+ 
     @Override
     public void endSession() throws PersistenceException {
         try {

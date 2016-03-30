@@ -68,7 +68,7 @@ public class Consulta {
 
     @Override
     public String toString() {
-        return "("+id+","+fechayHora+","+resumen+")"; //To change body of generated methods, choose Tools | Templates.
+        return "("+fechayHora+","+resumen+")"; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -83,12 +83,11 @@ public class Consulta {
             return false;
         }
         final Consulta other = (Consulta) obj;
-        if (this.id != other.id) {
-            return false;
-        }
+        
         if (!Objects.equals(this.resumen, other.resumen)) {
             return false;
         }
+        
         if (!Objects.equals(this.fechayHora, other.fechayHora)) {
             return false;
         }

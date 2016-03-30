@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.entities;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -96,6 +97,50 @@ public class Paciente {
         return rep;
     }
     
+     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paciente other = (Paciente) obj;
+        
+        if(this.id != other.id){
+            return false;
+        }
+        if(!this.tipo_id.equals(other.tipo_id)){
+            return false;
+        }
+        if(!this.nombre.equals(other.nombre)){
+            return false;
+        }
+        if(!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)){
+            return false;
+        }
+        if(this.consultas.size() != other.consultas.size()){
+            return false;
+        }
+        System.out.println((this.consultas.size() != other
+                .consultas.size())+"dsaa");
+        int cont=0;
+        for (Consulta c: this.consultas) {
+            for(Consulta o: other.consultas){
+                if(c.equals(o)){
+                    cont++;
+                }     
+            }
+        }
+         System.out.println(cont);
+        if(cont<this.consultas.size()){
+            return false;
+        }
+        return true;
+    }
     
     
 }

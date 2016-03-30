@@ -20,15 +20,11 @@ import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.persistence.DaoPaciente;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
-import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -38,11 +34,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
 
     Connection con;
 
-    @Override
-    public Connection getCon() {
-        return con;
-    }
-
+  
     public JDBCDaoPaciente(Connection con) {
         this.con = con;
     }
@@ -75,7 +67,6 @@ public class JDBCDaoPaciente implements DaoPaciente {
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading "+idpaciente,ex);
         }
-        //throw new RuntimeException("No se ha implementado el metodo 'load' del DAOPAcienteJDBC");
     }
 
     @Override
@@ -96,7 +87,6 @@ public class JDBCDaoPaciente implements DaoPaciente {
                 ps.setDate(4, p.getFechaNacimiento());
                 ps.execute();
             }else throw new PersistenceException(PersistenceException.PACIENTE_EXISTENTE); 
-            //Set<Consulta> setConsultas=p.getConsultas();
             String insertConsultas="INSERT INTO CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) "
                     + "VALUES (?,?,?,?)";
             ps=con.prepareStatement(insertConsultas);
@@ -107,21 +97,16 @@ public class JDBCDaoPaciente implements DaoPaciente {
                 ps.setInt(3, p.getId());
                 ps.setString(4, p.getTipo_id());  
                 ps.execute();
-                //n++;
-                //System.out.println("Paso"+c.toString());
             }
         } catch (SQLException e) {
-            //System.out.println(e);
             throw new PersistenceException("An error ocurred while saving a product.",e);
         }
-        //throw new RuntimeException("No se ha implementado el metodo 'Save' del DAOPAcienteJDBC");
 
     }
 
     @Override
     public void update(Paciente p) throws PersistenceException {
         PreparedStatement ps;
-        //boolean addConsulta;
         try {
             Set<Consulta> consultasPacienteUno=p.getConsultas();           
             String updated="UPDATE PACIENTES SET nombre=?,fecha_nacimiento=? WHERE id=? AND tipo_id=?";
@@ -141,24 +126,18 @@ public class JDBCDaoPaciente implements DaoPaciente {
             ps=con.prepareStatement(insert);
             ps.setInt(3, p.getId());
             ps.setString(4, p.getTipo_id());
-            //Paciente tmp=load(p.getId(),p.getTipo_id());
-            //Set<Consulta> consultasTmp=tmp.getConsultas();
-            //addConsulta=consultasTmp.size()<consultasPacienteUno.size();
             for(Consulta c:consultasPacienteUno){
                 ps.setDate(1, c.getFechayHora());
                 ps.setString(2, c.getResumen());
                 ps.execute();
             }
-            //David implemente update para Añadir consulta a paciente
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while updating a product.",ex);
         }
-        //throw new RuntimeException("No se ha implementado el metodo 'Update' del DAOPAcienteJDBC");
     }
 
     @Override
     public List<Paciente> load() throws PersistenceException {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         PreparedStatement ps;
         ArrayList<Paciente> pacientes=new ArrayList<Paciente>();
         String query="SELECT id, tipo_id FROM PACIENTES";
@@ -169,7 +148,6 @@ public class JDBCDaoPaciente implements DaoPaciente {
                 pacientes.add(load(rs.getInt(1),rs.getString(2)));
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(JDBCDaoPaciente.class.getName()).log(Level.SEVERE, null, ex);
             throw new PersistenceException("An error ocurred while list all.",ex);  
         }
         return pacientes;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper">
+    
+    <resultMap type="Paciente" id="pacienteResult">
+        <id property="id" column="id"/>
+        <result property="tipo_id" column="tipo_id"/>
+        <result property="nombre" column="nombre"/>
+        <result property="fechaNacimiento" column="fecha_nacimiento"/>
+        <collection property="consultas" ofType="Consulta" resultMap="consultaResult" columnPrefix='consulta_'/>
+    </resultMap>
+    
+    <resultMap type="Consulta" id="consultaResult">
+        <id property="id" column="idCONSULTAS"/>
+        <result property="resumen" column="resumen"/>
+        <result property="fechayHora" column="fecha_y_hora"/>
+    </resultMap>
+    
+    <select id="loadPacienteById" parameterType='map' resultMap='pacienteResult'>
+        SELECT pac.id, pac.tipo_id,  pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consulta_idCONSULTAS, con.resumen as consulta_resumen, con.fecha_y_hora as consulta_fecha_y_hora FROM PACIENTES as pac 
+        LEFT JOIN CONSULTAS as con ON pac.id=con.PACIENTES_id AND pac.tipo_id=con.PACIENTES_tipo_id
+        WHERE pac.id=#{idpaciente}   AND pac.tipo_id=#{tipoidpaciente}
+    </select>
+    
+    <insert id="insertPaciente" parameterType="map">
+        INSERT INTO PACIENTES (id,tipo_id,nombre,fecha_nacimiento) VALUES (#{paciente.id},#{paciente.tipo_id},#{paciente.nombre},#{paciente.fechaNacimiento})
+    </insert>
+    
+    <insert id="insertConsulta" useGeneratedKeys="true" keyProperty="consulta.id" parameterType="map"> 
+        INSERT INTO CONSULTAS (fecha_y_hora, resumen, PACIENTES_id ,PACIENTES_tipo_id) VALUES (#{consulta.fechayHora},#{consulta.resumen},#{idpaciente},#{tipoidpaciente})
+    </insert>  
+    
+    <select id="loadAll" parameterType='map' resultMap='pacienteResult'>
+        SELECT pac.id, pac.tipo_id,  pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consulta_idCONSULTAS, con.resumen as consulta_resumen, con.fecha_y_hora as consulta_fecha_y_hora FROM PACIENTES as pac 
+        LEFT JOIN CONSULTAS as con ON pac.id=con.PACIENTES_id AND pac.tipo_id=con.PACIENTES_tipo_id
+    </select>
+                                                                     
+</mapper>

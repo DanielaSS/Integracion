@@ -26,8 +26,6 @@ import java.util.List;
  * @author hcadavid
  */
 public interface DaoPaciente {
-
-    public Connection getCon();
     
     public Paciente load(int id, String tipoid) throws PersistenceException;
     
