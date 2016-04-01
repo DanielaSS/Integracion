@@ -6,7 +6,7 @@ deployment:
   staging:
     branch: master
     heroku:
-      appname: laboratoriopdsw8
+      appname: mybatis
 test:
   post:
     - mvn site
