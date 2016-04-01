@@ -51,6 +51,14 @@ public interface PacienteMapper {
      
     /**
      * Cargar todos los pacientes de la base de datos.
+     * @return 
      */
     public List<Paciente> loadAll();
+    
+    /**
+     * Actualizar un paciente
+     * @param old
+     * @param novo
+     */
+    public void update(@Param("viejo")Paciente old,@Param("nuevo")Paciente novo);
 }

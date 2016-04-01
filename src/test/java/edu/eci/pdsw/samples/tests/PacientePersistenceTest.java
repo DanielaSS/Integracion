@@ -51,12 +51,12 @@ public class PacientePersistenceTest {
         Connection conn = DriverManager.getConnection("jdbc:h2:file:./target/db/testdb;MODE=MYSQL", "", "");
         Statement stmt = conn.createStatement();
         stmt.execute("delete from CONSULTAS");
-         stmt.execute("delete from PACIENTES");
+        stmt.execute("delete from PACIENTES");
          
     }
     @Test
     public void classEquivRegistroPacienteMasDeUnaConsulta(){
-        //System.out.println("Prueba 1 Paciente mas de una consulta");
+        System.out.println("Prueba 1 Paciente mas de una consulta");
         InputStream input = null;
         input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
         Properties properties=new Properties();
@@ -87,6 +87,7 @@ public class PacientePersistenceTest {
             daof.commitTransaction();
             Paciente p=a.load(paciente.getId(), paciente.getTipo_id());
             daof.endSession();
+            System.out.println("Prueba mas de una consulta");
             assertTrue(paciente.equals(p));
             
         } catch (PersistenceException ex) {
@@ -96,7 +97,7 @@ public class PacientePersistenceTest {
     //2         DAOPaciente.save()      Paciente nuevo que se registra sin consultas
     @Test
     public void classEquivRegistroPacienteSinConsultas(){
-        //System.out.println("Prueba 2 Paciente sin consultas");
+        System.out.println("Prueba 2 Paciente sin consultas");
         InputStream input = null;
         input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
         Properties properties=new Properties();
@@ -132,7 +133,7 @@ public class PacientePersistenceTest {
     //3 	DAOPaciente.save() 	Paciente nuevo que se registra con sólo una consulta 	
    @Test
     public void classEquivSaveNuevoPacienteConUnaConsulta(){
-        //System.out.println("Prueba 3, paciente nuevo que se registra con solo una consulta");
+        System.out.println("Prueba 3, paciente nuevo que se registra con solo una consulta");
         InputStream input = null;
         input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
         Properties properties=new Properties();       
@@ -142,20 +143,23 @@ public class PacientePersistenceTest {
             fail("No se cargaron las propiedades");
         }
         DaoFactory daof=DaoFactory.getInstance(properties);
+        
         try{
             daof.beginSession();
+            
             DaoPaciente persistenciaPaciente=daof.getDaoPaciente();
             Paciente unPaciente=new Paciente(3,"CC","Isabel Marin",Date.valueOf("1990-08-15"));
             Consulta unaConsulta=new Consulta(Date.valueOf("2016-03-03"),"Golpe en la cabeza por desmayo");
             Set<Consulta> setConsultas=new HashSet<Consulta>();
             setConsultas.add(unaConsulta);
             unPaciente.setConsultas(setConsultas);
+            
             persistenciaPaciente.save(unPaciente);
+            //System.out.println("Paso");
             daof.commitTransaction();
             
             Paciente p=persistenciaPaciente.load(unPaciente.getId(), unPaciente.getTipo_id());
-            daof.endSession();
-            
+            daof.endSession();          
             assertTrue(unPaciente.equals(p));
            
             
@@ -167,7 +171,7 @@ public class PacientePersistenceTest {
     //4 	DAOPaciente.save() 	Paciente nuevo YA existente que se registra con más de una consulta
     @Test
     public void classEquivPacienteRepetido() throws PersistenceException{
-        //System.out.println("Prueba 4, paciente nuevo YA existente que se registra con más de una consulta");
+        System.out.println("Prueba 4, paciente nuevo YA existente que se registra con más de una consulta");
         InputStream input = null;
         input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
         Properties properties=new Properties();       
