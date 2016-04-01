@@ -20,6 +20,6 @@
         
  <mappers>
     <mapper resource="mappers/PacienteMapper.xml"></mapper>
-</mappers
+</mappers>
         
 </configuration>
