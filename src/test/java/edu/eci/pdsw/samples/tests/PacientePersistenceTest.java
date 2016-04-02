@@ -87,7 +87,6 @@ public class PacientePersistenceTest {
             daof.commitTransaction();
             Paciente p=a.load(paciente.getId(), paciente.getTipo_id());
             daof.endSession();
-            System.out.println("Prueba mas de una consulta");
             assertTrue(paciente.equals(p));
             
         } catch (PersistenceException ex) {
@@ -232,8 +231,9 @@ public class PacientePersistenceTest {
             persistenciaPaciente.update(unPaciente);
             System.out.println("Paso de update");
             daof.commitTransaction(); 
-            persistenciaPaciente.save(unPaciente);  
-            daof.commitTransaction(); 
+            Paciente p=persistenciaPaciente.load(unPaciente.getId(), unPaciente.getTipo_id());
+            daof.endSession();
+            assertTrue(unPaciente.equals(p));
         } catch (PersistenceException ex) {
             System.out.println(ex);
         } finally{
