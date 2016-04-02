@@ -204,4 +204,40 @@ public class PacientePersistenceTest {
             daof.endSession();
         }
     }
+    @Test
+    public void pruebaAgregarConsulta() throws PersistenceException{
+        InputStream input = null;
+        input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
+        Properties properties=new Properties();       
+        try {
+            properties.load(input);
+        } catch (IOException ex) {
+            fail("No se cargaron las propiedades");
+        }
+        DaoFactory daof=DaoFactory.getInstance(properties);
+        try{
+            daof.beginSession();
+            DaoPaciente persistenciaPaciente=daof.getDaoPaciente();
+            Paciente unPaciente=new Paciente(400,"CC","Maria alejandra Gallego",Date.valueOf("1999-01-30"));
+            Consulta unaConsulta=new Consulta(Date.valueOf("2016-01-26"),"Alergia a picadura de abeja");
+            Consulta dosConsulta=new Consulta(Date.valueOf("2016-01-27"),"Revision picadura abeja");
+            Consulta tresConsulta=new Consulta(Date.valueOf("2016-02-21"),"Revision efecto de los antinflamatorios");
+            Set<Consulta> setConsultas=new HashSet<Consulta>();
+            persistenciaPaciente.save(unPaciente);
+            setConsultas.add(unaConsulta);
+            setConsultas.add(dosConsulta);
+            setConsultas.add(tresConsulta);
+            unPaciente.setConsultas(setConsultas);
+            System.out.println("Paso hasta aqui, entra a update");
+            persistenciaPaciente.update(unPaciente);
+            System.out.println("Paso de update");
+            daof.commitTransaction(); 
+            persistenciaPaciente.save(unPaciente);  
+            daof.commitTransaction(); 
+        } catch (PersistenceException ex) {
+            System.out.println(ex);
+        } finally{
+            daof.endSession();
+        }    
+    }
 }

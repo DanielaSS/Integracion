@@ -39,6 +39,6 @@
     </select>
     
     <update id="update" parameterType='map'>
-        UPDATE PACIENTES SET viejo.nombre=nuevo.nombre WHERE viejo.id=nuevo.id AND viejo.tipo_id=nuevo.tipo_id
+        UPDATE PACIENTES SET nombre=#{nuevo.nombre},fecha_nacimiento=#{nuevo.fechaNacimiento} WHERE #{viejo.id}=#{nuevo.id} AND #{viejo.tipo_id}=#{nuevo.tipo_id}
     </update>
 </mapper>
