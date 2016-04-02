@@ -50,8 +50,8 @@ public class MyBatisDaoPaciente implements DaoPaciente{
         Set<Consulta>pCon=p.getConsultas();
         Set<Consulta>rCon=r.getConsultas();
         pmap.update(p,r);
-        for(Consulta c:rCon){
-            if(!pCon.contains(c)){
+        for(Consulta c:pCon){
+            if(!rCon.contains(c)){
                 pmap.insertConsulta(c, p.getId(), p.getTipo_id());
             }
         }
